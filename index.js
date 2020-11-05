@@ -20,8 +20,40 @@ mongoose
     return self.connection.dropDatabase();
   })
   .then(() => {
-    // Run your code here, after you have insured that the connection was made
-  })
-  .catch(error => {
-    console.error('Error connecting to the database', error);
+    
+  const recipe1 = {
+    title: 'Brownie',
+    level: 'Easy Peasy',
+    ingredients: ['Chocolate', 'Walnuts'],
+    cuisine: 'American',
+    dishType: 'dessert',
+    image: 'https://https://cozinhatecnica.com/wp-content/uploads/2019/10/brownie.jpg',
+    duration: 40,
+    creator: 'Chef Diogo',
+    //O ERRO ESTAVA AQUI created:{ type: Date, default: Date.now },
+  };
+  Recipe.create(recipe1).then(() => {
+  console.log(recipe1.title)
   });
+  Recipe.insertMany(data).then((arrayOfCreatedRecipe) => {
+    arrayOfCreatedRecipe.forEach(el => {
+      console.log(el.title)
+    });
+
+    Recipe.findOneAndUpdate({ title: 'Rigatoni alla Genovese' }, { duration: 100 }, { new: true }).then((e) => {
+      // console.log('sucess', e)
+    })
+    Recipe.findOneAndRemove({ title: 'Carrot Cake' }).then((e) => {
+      console.log('removed', e)
+    }).catch(err => {
+      console.log(err)
+      
+      mongoose.disconnect()
+    });
+
+  });
+
+})
+.catch(error => {
+  console.error('Error connecting to the database', error);
+});
