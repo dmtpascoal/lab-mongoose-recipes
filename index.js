@@ -36,15 +36,15 @@ mongoose
   console.log(recipe1.title)
   });
   Recipe.insertMany(data).then((arrayOfCreatedRecipe) => {
-    arrayOfCreatedRecipe.forEach(el => {
-      console.log(el.title)
+    arrayOfCreatedRecipe.forEach(response => {
+      console.log(response.title)
     });
 
-    Recipe.findOneAndUpdate({ title: 'Rigatoni alla Genovese' }, { duration: 100 }, { new: true }).then((e) => {
-      // console.log('sucess', e)
+    Recipe.findOneAndUpdate({ title: 'Rigatoni alla Genovese' }, { duration: 100 }, { new: true }).then((response) => {
+    console.log('sucess', response)
     })
-    Recipe.findOneAndRemove({ title: 'Carrot Cake' }).then((e) => {
-      console.log('removed', e)
+    Recipe.findOneAndRemove({ title: 'Carrot Cake' }).then((response) => {
+      console.log('removed', response)
     }).catch(err => {
       console.log(err)
       
